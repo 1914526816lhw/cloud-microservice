@@ -30,6 +30,7 @@ public class PaymentController {
     @RequestMapping("/payment/create")
     public CommonResult create(Payment payment) {
         int result = paymentService.create(payment);
+        System.out.println("Hello World");
         log.info("****插入结果：" + result);
         if (result > 0) {
             return new CommonResult(200, "插入数据成功", result);
@@ -40,6 +41,7 @@ public class PaymentController {
 
     @GetMapping(value = "/payment/get/{id}")
     public CommonResult getPaymentById(@PathVariable("id") Long id) {
+//        System.out.println("Hello World");
         Payment payment = paymentService.getPaymentById(id);
         log.info("****查询结果：" + payment);
         if (payment != null) {
