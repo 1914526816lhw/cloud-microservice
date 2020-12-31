@@ -1,0 +1,3 @@
+server:
+  # 描述为什么选择80端口 https://baike.baidu.com/item/80%E7%AB%AF%E5%8F%A3/7581041?fr=aladdin
+  port: 80
