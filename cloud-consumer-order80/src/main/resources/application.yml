@@ -1,3 +1,22 @@
 server:
   # 描述为什么选择80端口 https://baike.baidu.com/item/80%E7%AB%AF%E5%8F%A3/7581041?fr=aladdin
   port: 80
+
+spring:
+  application:
+    name: cloud-order-service
+
+eureka:
+  client:
+    #表示收将自己注册到EurekaServer，默认为true
+    register-with-eureka: true
+    #是否从EurekaServer抓取已有的注册信息，默认为true，单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡
+    fetchRegistry: true
+    service-url:
+#      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+  instance:
+    instance-id: order80
+    prefer-ip-address: true   #访问路径可以显示IP地址
+
+
