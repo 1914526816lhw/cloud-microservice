@@ -32,7 +32,7 @@ public class PaymentController {
         System.out.println("Hello World");
         log.info("****插入结果：" + result);
         if (result > 0) {
-            return new CommonResult(200, "插入数据成功,serverPort："+serverPort, result);
+            return new CommonResult(200, "插入数据成功,serverPort：" + serverPort, result);
         } else {
             return new CommonResult(444, "插入数据失败", null);
         }
@@ -44,9 +44,14 @@ public class PaymentController {
         Payment payment = paymentService.getPaymentById(id);
         log.info("****查询结果：" + payment);
         if (payment != null) {
-            return new CommonResult(200, "查询数据成功，serverPort："+serverPort, payment);
+            return new CommonResult(200, "查询数据成功，serverPort：" + serverPort, payment);
         } else {
             return new CommonResult(444, "查询数据失败,查询id：" + id, null);
         }
+    }
+
+    @GetMapping(value = "/payment/lb")
+    public String getPaymentLB() {
+        return serverPort;
     }
 }

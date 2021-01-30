@@ -14,7 +14,7 @@ eureka:
     fetchRegistry: true
     service-url:
 #      defaultZone: http://localhost:7001/eureka
-      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+      defaultZone: http://eureka7001.springcloud:7001/eureka,http://eureka7002.springcloud:7002/eureka
   instance:
     instance-id: order80
     prefer-ip-address: true   #访问路径可以显示IP地址
