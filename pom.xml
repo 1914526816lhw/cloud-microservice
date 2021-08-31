@@ -11,7 +11,7 @@
 
     <modules>
         <module>cloud-provider-ek-payment8001</module>
-        <module>cloud-consumer-order80</module>
+        <module>cloud-consumer-ek-order80</module>
         <module>cloud-api-commons</module>
         <module>cloud-eureka-server7001</module>
         <module>cloud-eureka-server7002</module>
