@@ -2,21 +2,21 @@ package com.atguigu.springcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * ClassName：EnableFeignClients
+ * ClassName：OrderConsulMain80
  * Description：
  *
  * @author lihw
- * CreateTime: 2021/1/30 22:14
+ * CreateTime: 2021/1/19 16:55
  * @version 1.0.0
  */
 @SpringBootApplication
-@EnableFeignClients
-public class OrderFeignMain80 {
-    public static void main(String[] args) {
-        SpringApplication.run(OrderFeignMain80.class, args);
-    }
+@EnableDiscoveryClient
+public class ConsulOrderMain80 {
 
+    public static void main(String[] args) {
+        SpringApplication.run(ConsulOrderMain80.class, args);
+    }
 }

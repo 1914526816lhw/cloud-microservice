@@ -4,19 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-/**
- * ClassName：OrderMain80
- * Description：
- *
- * @author lihw
- * CreateTime: 2021/1/5 23:09
- * @version 1.0.0
- */
 @SpringBootApplication
-@EnableDiscoveryClient
-public class OrderZKMain80 {
-
+@EnableDiscoveryClient  //该注解用于向consul或者zookeeper作为注册中心时注册服务
+public class ZKPaymentMain8004 {
     public static void main(String[] args) {
-        SpringApplication.run(OrderZKMain80.class, args);
+        SpringApplication.run(ZKPaymentMain8004.class, args);
     }
 }
