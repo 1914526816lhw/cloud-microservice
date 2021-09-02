@@ -36,7 +36,8 @@ public class OrderController {
 
     @GetMapping("/consumer/payment/get/{id}")
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id) {
-        return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
+        URI uri = loadBalancer.instances(discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE")).getUri();
+        return restTemplate.getForObject(uri + "/payment/get/" + id, CommonResult.class);
     }
 
     @GetMapping("/consumer/payment/getForEntity/{id}")
