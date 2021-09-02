@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-consumer-feign-order80</artifactId>
+    <artifactId>cloud-consumer-openfeign-order80</artifactId>
 
     <dependencies>
         <!--openfeign-->

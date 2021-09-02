@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>cloud-consumer-openfeign-order80</module>
         <module>cloud-provider-ek-payment8001</module>
         <module>cloud-consumer-ek-order80</module>
         <module>cloud-api-commons</module>
