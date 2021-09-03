@@ -75,4 +75,15 @@ public class PaymentController {
     public String getPaymentLB() {
         return serverPort;
     }
+
+    //openfeign超时控制测试
+    @GetMapping(value = "payment/openfeign/timeout")
+    public CommonResult<Object> timeout() {
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new CommonResult(200, "success", "openfeign超时控制测试");
+    }
 }

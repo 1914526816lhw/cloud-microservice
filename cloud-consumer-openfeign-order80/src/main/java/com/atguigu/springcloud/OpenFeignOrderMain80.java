@@ -2,6 +2,7 @@ package com.atguigu.springcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @version 1.0.0
  */
 @SpringBootApplication
+@EnableEurekaClient
 @EnableFeignClients
 public class OpenFeignOrderMain80 {
     public static void main(String[] args) {
