@@ -34,10 +34,12 @@ public interface PaymentFeignService {
     }
 */
 
+/*
+openfeign测试
+ */
     @GetMapping(value = "/payment/get/{id}")
     CommonResult<Payment> getPaymentById(@PathVariable("id") Long id);
 
     @GetMapping(value = "/payment/openfeign/timeout")
     CommonResult<Payment> timeout();
-
 }

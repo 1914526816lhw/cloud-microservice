@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: cloud-openfeign-order-service
+    name: cloud-payment-hystrix-order
 
 eureka:
   client:
@@ -15,23 +15,21 @@ eureka:
       #      defaultZone: http://localhost:7001/eureka  #单机版
       defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka #集群版
   instance:
-    instance-id: openfeign-order80
+    instance-id: hystrix-order80
     #访问路径可以显示IP地址
     prefer-ip-address: true
     #eureka客户端向服务端发送心跳的时间间隔，单位为秒（默认为30秒）
     lease-renewal-interval-in-seconds: 1
     #eureka服务端在收到最后一次心跳后等待时间上限，单位为秒（默认为90秒），超时将删除服务
-    lease-expiration-duration-in-seconds: 2
+    lease-expiration-duration-in-seconds: 4
 
 #设置feign客户端超时时间(OpenFeign 默认支持ribbon)
 ribbon:
   #指的是建立连接所用时间,适用于网络状况正常情况下,两端连接所用时间
   ReadTimeout: 5000
   #指的是连接建立后,从服务器获取到可用资源所用时间
-  ConnectTimeout: 2000
+  ConnectTimeout: 4000
 
-
-#feign 日志以什么级别监控那个接口
-logging:
-  level:
-    com.atguigu.springcloud.service: debug
+feign:
+  hystrix:
+    enabled: true #如果处理自身的容错就开启。开启方式与生产端不一样。
