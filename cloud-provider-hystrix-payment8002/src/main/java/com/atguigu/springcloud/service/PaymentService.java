@@ -1,5 +1,7 @@
 package com.atguigu.springcloud.service;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 /**
  * @author 李宏伟
  * @version 1.0
@@ -14,4 +16,7 @@ public interface PaymentService {
 
     /*异常方法*/
     public String paymentInfo_Error(Integer id);
+
+    /*======================服务熔断=====================*/
+    public String paymentCircuitBreaker(Integer id);
 }

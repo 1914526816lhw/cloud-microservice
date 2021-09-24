@@ -22,4 +22,9 @@ public class PaymentFallbackServiceImpl implements PaymentHystrixService {
     public String getError(Integer id) {
         return "-------- PaymentFallbackServiceImpl fallback, request timeout or RunException----------";
     }
+
+    @Override
+    public String paymentCircuitBreaker(Integer id) {
+        return "-------- PaymentFallbackServiceImpl circuit breaker ----------";
+    }
 }
