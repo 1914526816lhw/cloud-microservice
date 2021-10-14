@@ -10,6 +10,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -72,8 +73,9 @@ public class PaymentController {
     }
 
     @GetMapping(value = "/payment/lb")
-    public String getPaymentLB() {
+    public String getPaymentLB(HttpServletRequest request) {
         return serverPort;
+//        return serverPort+":"+request.getHeader("X-Request-red");
     }
 
     //openfeign超时控制测试
