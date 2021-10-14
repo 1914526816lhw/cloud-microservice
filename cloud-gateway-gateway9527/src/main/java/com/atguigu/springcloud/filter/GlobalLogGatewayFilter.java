@@ -47,7 +47,7 @@ public class GlobalLogGatewayFilter implements GlobalFilter, Ordered {
             //最后终止向下一个过滤器方法提供委托，并返回响应
             return exchange.getResponse().setComplete();
         }
-        // 放行
+        // 放行，并将委托给过滤链中的下一个过滤器
         return chain.filter(exchange);
     }
 
