@@ -2,20 +2,19 @@ package com.atguigu.springcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * @author 李宏伟
  * @version 1.0
- * @ClassName CloudConfigCenterMain3344
+ * @ClassName ConfigCenterClientMain3355
  * @Description
- * @date 2021年10月15日 10:40
+ * @date 2021年10月18日 12:22
  */
 @SpringBootApplication
-//激活配置中心
-@EnableConfigServer
-public class ConfigCenterMain3344 {
+@EnableEurekaClient
+public class ConfigCenterClientMain3355 {
     public static void main(String[] args) {
-        SpringApplication.run(ConfigCenterMain3344.class, args);
+        SpringApplication.run(ConfigCenterClientMain3355.class, args);
     }
 }
