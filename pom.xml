@@ -28,6 +28,7 @@
         <module>cloud-gateway-gateway9527</module>
         <module>cloud-config-center-server3344</module>
         <module>cloud-config-center-client3355</module>
+        <module>cloud-config-center-client3366</module>
     </modules>
 
 
