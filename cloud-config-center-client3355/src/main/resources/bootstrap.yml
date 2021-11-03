@@ -17,7 +17,7 @@ spring:
       profile: dev  #配置文件后缀名称
       #uri: http://localhost:3344 #配置中心服务端地址
 
-  # rabbitmq相爱难改观配置 15672是 Web 管理界面的端口；5672是MQ访问的端口
+  # rabbitmq 相关配置 15672是 Web 管理界面的端口；5672是MQ访问的端口
   rabbitmq:
     host: localhost
     port: 5672

@@ -1,39 +1,29 @@
 server:
-  port: 3366
+  port: 8801
 
 spring:
   application:
-    name: cloud-config-center-client
+    name: cloud-stream-rabbitmq-provider
   cloud:
-    # Config 客户端配置
-    config:
-      discovery:
-        #开启服务发现
-        enabled: true
-        # 服务id
-        service-id: cloud-config-center-server
-      label: master #分支名称
-      name: config  #配置文件名
-      profile: dev  #配置文件后缀名称
-      #uri: http://localhost:3344 #配置中心服务端地址
-
-  # rabbitmq 相关配置 15672是 Web 管理界面的端口；5672是MQ访问的端口
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    stream:
+      binders:  # 在此处配置要绑定的 rabbitmq 的服务信息
+        defaultRabbit:  # 表示定义的名称，用于 binding 整合
+          type: rabbit  # 消息组件类型
+          environment:  # 设置 rabbitmq 的相关的环境配置
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+      bindings: # 服务的整合处理
+        output: # 这个名字是一个通道的名称
+          destination: studyExchange  # 表示要使用的 Exchange 名称定义
+          content-type: application/json  #设置消息类型，本次为json，文本则设置 text/plain
+          binder: defaultRabbit   # 设置要绑定的消息服务的具体设置
 
 
-# 暴露监控断点
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
 
-
-# 服务注册中心
 eureka:
   client:
     #表示收将自己注册到EurekaServer，默认为true
@@ -44,7 +34,7 @@ eureka:
       #      defaultZone: http://localhost:7001/eureka  #单机版
       defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka  #集群版
   instance:
-    instance-id: config-center-client3366
+    instance-id: rabbit-send8801.com
     #访问路径可以显示IP地址
     prefer-ip-address: true
     #eureka客户端向服务端发送心跳的时间间隔，单位为秒（默认为30秒）
