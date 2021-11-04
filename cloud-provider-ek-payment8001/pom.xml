@@ -13,6 +13,11 @@
 
     <dependencies>
 
+        <!--包含了sleuth+zipkin-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
         <!--Eureka客户端-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

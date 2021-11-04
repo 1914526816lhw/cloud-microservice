@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @Slf4j
@@ -70,5 +71,11 @@ public class OrderController {
         ServiceInstance serviceInstance = loadBalancer.instances(instances);
         URI uri = serviceInstance.getUri();
         return restTemplate.getForObject(uri + "/payment/lb", String.class);
+    }
+
+    //SpringCloud Sleuth、Zipkin 请求链路跟踪测试
+    @GetMapping(value = "/consumer/payment/zipkin")
+    public String paymentZipkin() {
+        return  restTemplate.getForObject(PAYMENT_URL + "/payment/zipkin", String.class);
     }
 }

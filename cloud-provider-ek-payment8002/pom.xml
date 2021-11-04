@@ -13,12 +13,16 @@
 
     <dependencies>
 
+        <!--包含了sleuth+zipkin-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
         <!--Eureka客户端-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
         <!--导入公共实体或者API依赖-->
         <dependency>
             <groupId>com.atguigu.springcloud</groupId>

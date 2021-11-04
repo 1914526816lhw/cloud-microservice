@@ -88,4 +88,10 @@ public class PaymentController {
         }
         return new CommonResult(200, "success", "openfeign超时控制测试");
     }
+
+    //SpringCloud Sleuth、Zipkin 请求链路跟踪测试
+    @GetMapping(value = "/payment/zipkin")
+    public String paymentZipkin() {
+        return "服务：" + serverPort + "--》 Zipkin 请求链路跟踪测试";
+    }
 }
