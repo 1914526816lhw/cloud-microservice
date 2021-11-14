@@ -35,6 +35,7 @@
         <module>cloud-alibaba-nacos-discovery-provider-payment9001</module>
         <module>cloud-alibaba-nacos-discovery-provider-payment9002</module>
         <module>cloud-alibaba-nacos-discovery-consumer-order80</module>
+        <module>cloud-alibaba-nacos-config-center-client3377</module>
     </modules>
 
 
