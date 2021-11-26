@@ -1,0 +1,43 @@
+server:
+  port: 8401
+
+spring:
+  application:
+    name: cloud-alibaba-sentinel-service
+  cloud:
+    nacos:
+      # 服务注册
+      discovery:
+        # server-addr: localhost:8848 # 服务注册中心地址
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        # 服务监控端口
+        dashboard: localhost:8080
+        # 应用或服务于控制交互端口：默认 8719，假如被占用了会自动从 8719 开始依次 +1 扫描，直至找到未被占用的端口
+        port: 8719
+      # 配置文件中关闭sentinel官方的CommonFilter实例化
+      filter:
+        enabled: false
+      # Sentinel 规则持久化
+      datasource:
+        # 流控持久化
+        flow:
+          nacos:
+            server-addr: localhost:8848
+            dataId: ${spring.application.name}
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# 开启基于 sentinel 的 OpenFeign 调用熔断降级支持
+feign:
+  sentinel:
+    enabled: true
