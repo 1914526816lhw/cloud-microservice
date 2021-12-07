@@ -37,6 +37,9 @@
         <module>cloud-alibaba-nacos-discovery-consumer-order80</module>
         <module>cloud-alibaba-nacos-config-center-client3377</module>
         <module>cloud-alibaba-sentinel-service8401</module>
+        <module>seata-order-service2001</module>
+        <module>seata-storage-service2002</module>
+        <module>seata-account-service2003</module>
     </modules>
 
 
@@ -72,22 +75,15 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--spring cloud alibaba 2.1.0.RELEASE-->
-            <!--<dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2.1.0.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>-->
-
+            <!--spring cloud alibaba 2.2.7.RELEASE-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>LATEST</version>
+                <version>2.2.7.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
 
             <dependency>
                 <groupId>mysql</groupId>
@@ -129,6 +125,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.2.2.RELEASE</version>
                 <configuration>
                     <fork>true</fork>
                     <addResources>true</addResources>

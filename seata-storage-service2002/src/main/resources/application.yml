@@ -1,0 +1,60 @@
+server:
+  port: 2002
+
+spring:
+  application:
+    name: seata-storage-service
+  cloud:
+    nacos:
+      # 注册中心
+      discovery:
+        server-addr: http://localhost:8848
+        username: nacos
+        password: nacos
+        group: SEATA_GROUP
+        namespace: 0b0b9b5d-4e28-44c1-a359-8975169fb30b
+    alibaba:
+      # seata分布式事务框架
+      seata:
+        #自定义事务组名称需要与 seata-server 中的对应
+        tx-service-group: my_test_tx_group
+
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_storage?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+
+# springcloud Alibaba 2.1.+ 版本以后可以通过配置seata client连接并访问到nacos配置中心，之前需要script下的配置文件
+# Seata Client
+seata:
+  # seata 客户端注册中心
+  registry:
+    type: nacos
+    nacos:
+      server-addr: http://localhost:8848
+      # 此处取的是注册到服务注册中心的服务名，默认 seata_server
+      application: seata-server
+      username: nacos
+      password: nacos
+      # 分组，默认 SEATA_SERVER
+      group: SEATA_GROUP
+      namespace: 0b0b9b5d-4e28-44c1-a359-8975169fb30b
+  # seata 客户端配置中心
+  config:
+    type: nacos
+    nacos:
+      server-addr: http://localhost:8848
+      username: nacos
+      password: nacos
+      group: SEATA_GROUP
+      namespace: 0b0b9b5d-4e28-44c1-a359-8975169fb30b
+
+
+# 日志
+logging:
+  level:
+    io:
+      seata: info
+

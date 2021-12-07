@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface PaymentDao {
 
-       /*新增*/
+    /*新增*/
     public int create(Payment payment);
 
     public Payment getPaymentById(@Param("id") Long id);
