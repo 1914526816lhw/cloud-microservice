@@ -16,6 +16,7 @@ spring:
                 port: 5672
                 username: guest
                 password: guest
+                publisher-confirm-type: correlated
       bindings: # 服务的整合处理
         output: # 这个名字是一个通道的名称
           destination: studyExchange  # 表示要使用的 Exchange 名称定义
