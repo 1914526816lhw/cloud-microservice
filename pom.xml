@@ -41,6 +41,7 @@
         <module>seata-storage-service2002</module>
         <module>seata-account-service2003</module>
         <module>quartz-time-task-service7003</module>
+        <module>cloud-mq-service</module>
     </modules>
 
 

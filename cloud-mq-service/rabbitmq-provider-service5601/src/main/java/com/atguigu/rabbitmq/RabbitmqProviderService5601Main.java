@@ -1,0 +1,26 @@
+package com.atguigu.rabbitmq;
+
+import com.rabbitmq.client.Channel;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * @author 李宏伟
+ * @version 1.0
+ * @ClassName RabbitmqProviderService5601Main
+ * @Description
+ * @date 2022年04月24日 21:57
+ */
+
+
+@EnableRabbit
+@SpringBootApplication
+public class RabbitmqProviderService5601Main {
+
+
+    public static void main(String[] args) {
+        SpringApplication.run(RabbitmqProviderService5601Main.class, args);
+    }
+}

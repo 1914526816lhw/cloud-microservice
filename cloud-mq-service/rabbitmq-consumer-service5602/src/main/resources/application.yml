@@ -1,0 +1,26 @@
+server:
+  port: 5602
+
+spring:
+  application:
+    name: rabbitmq-provider-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    #确认消息已发送到交换机(Exchange)
+    publisher-confirm-type: correlated
+    #确认消息已发送到队列(Queue)
+    publisher-returns: true
+    template:
+      # 消息发送失败返回到队列中, yml需要配置 publisher-returns: true
+      mandatory: true
+    listener:
+      simple:
+        # NONE 自动确认 RabbitMQ成功将消息发出（即将消息成功写入TCP Socket）中立即认为本次投递已经被正确处理，不管消费者端是否成功处理本次投递。
+        #      所以这种情况如果消费端消费逻辑抛出异常，也就是消费端没有处理成功这条消息，那么就相当于丢失了消息。
+        #      一般这种情况我们都是使用try catch捕捉异常后，打印日志用于追踪数据，这样找出对应数据再做后续处理。
+        # MANUAL 手动确认 需要人为地获取到channel之后调用方法向server发送ack（或消费失败时的nack）信息。
+        # AUTO 由spring-rabbit依据消息处理逻辑是否抛出异常自动发送ack（无异常）或nack（异常）到server端。
+        acknowledge-mode: manual #手动ACK
