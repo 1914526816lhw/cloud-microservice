@@ -1,6 +1,5 @@
 package com.atguigu.rabbitmq.service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 
 /**
  * @author 李宏伟
@@ -35,24 +33,24 @@ public class RabbitMQConsumerServiceImpl implements IRabbitMQConsumerService {
     @RabbitListener(
             bindings = {
                     @QueueBinding(
-                            value = @Queue(name = "test-queue"),
-                            exchange = @Exchange(name = "test-exchange", type = ExchangeTypes.DIRECT, durable = "true"),
-                            key = {"test-key"}
+                            value = @Queue(name = "TEST-QUEUE", durable = "true", autoDelete = "false"),
+                            exchange = @Exchange(name = "TEST-EXCHANGE", type = ExchangeTypes.DIRECT, durable = "true", autoDelete = "false"
+                            ),
+                            key = {"TEST-ROUTE-KEY"}
                     )
             }
     )
     @Override
-    public void receiveMsg(JSONObject paramJson,Message message, Channel channel) {
+    public void receiveMsg(JSONObject paramJson, Message message, Channel channel) {
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         System.out.println(deliveryTag);
-        System.out.println(channel.isOpen());
         try {
             System.out.println(paramJson.toJSONString());
-            channel.basicAck(deliveryTag,false);
-        }catch (Exception e){
+            channel.basicAck(deliveryTag, false);
+        } catch (Exception e) {
             e.printStackTrace();
             try {
-                channel.basicNack(deliveryTag,false,false);
+                channel.basicNack(deliveryTag, false, false);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

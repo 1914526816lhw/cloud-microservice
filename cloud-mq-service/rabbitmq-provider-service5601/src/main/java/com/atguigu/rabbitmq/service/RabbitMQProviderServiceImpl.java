@@ -1,6 +1,7 @@
 package com.atguigu.rabbitmq.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.atguigu.rabbitmq.util.RabbitmqUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,9 @@ public class RabbitMQProviderServiceImpl implements IRabbitMQProviderService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-
     @Override
     public String sendMsg(JSONObject paramJson) {
-        rabbitTemplate.convertAndSend("test-exchange", "test-key", paramJson);
+        rabbitTemplate.convertAndSend(RabbitmqUtils.RabbitmqExchanges.TEST_EXCHANGE, RabbitmqUtils.RabbitmqRoutingKeys.TEST_ROUTE_KEY, paramJson);
         return "消息发送成功";
     }
 }
