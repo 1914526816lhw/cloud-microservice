@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://2d77196l54.51vip.biz:24951/flowable?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
+    username: root
+    password: 123456
+flowable:
+  #当监测到数据库表版本不一致是，会自动升级,没有对应的表会自动创建
+  database-schema-update: true
+  #关闭定时任务
+  async-executor-activate: false
