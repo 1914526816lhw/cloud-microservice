@@ -1,6 +1,7 @@
 package com.flowable.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.flowable.common.CommonResult;
 import com.flowable.service.IFlowableService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,27 @@ public class FloableController {
     private IFlowableService iFlowableService;
 
     @RequestMapping("/startProcess")
-    public Object startProcess(@RequestBody Map<String, Object> map) {
+    public CommonResult startProcess(@RequestBody Map<String, Object> map) {
         log.info(map.toString());
-        return iFlowableService.startProcess(map);
+        iFlowableService.startProcess(map);
+        return new CommonResult(200,"开始流程成功");
+    }
+
+
+    @RequestMapping("/queryTasksByAssignee")
+    public CommonResult queryTasksByAssignee(String assignee) {
+        return iFlowableService.queryTasksByAssignee(assignee);
+    }
+
+    @RequestMapping("/completeTask")
+    public CommonResult completeTask(@RequestBody JSONObject paramJson) {
+        iFlowableService.completeTask(paramJson);
+        return new CommonResult(200,"完成审核任务成功");
+
+    }
+
+    @RequestMapping("/queryProcessTaskHistory")
+    public CommonResult queryProcessTaskHistory(String processId){
+        return iFlowableService.queryProcessTaskHistory(processId);
     }
 }

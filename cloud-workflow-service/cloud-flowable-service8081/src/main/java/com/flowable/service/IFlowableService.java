@@ -1,6 +1,9 @@
 package com.flowable.service;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.flowable.common.CommonResult;
+
 import java.util.Map;
 
 /**
@@ -18,8 +21,15 @@ import java.util.Map;
      */
 public interface IFlowableService {
 
-    /*开始流程*/
-    public Object startProcess(Map<String,Object> map);
+    /*启动流程*/
+    public void startProcess(Map<String,Object> map);
 
-    /**/
+    /*查询任务*/
+    public CommonResult queryTasksByAssignee(String assignee);
+
+    /*审批流程*/
+    public void completeTask(JSONObject paramJson);
+
+    /*查询流程任务历史数据*/
+    public CommonResult queryProcessTaskHistory(String processId);
 }
