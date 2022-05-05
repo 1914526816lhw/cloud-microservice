@@ -24,3 +24,24 @@ spring:
         # MANUAL 手动确认 需要人为地获取到channel之后调用方法向server发送ack（或消费失败时的nack）信息。
         # AUTO 由spring-rabbit依据消息处理逻辑是否抛出异常自动发送ack（无异常）或nack（异常）到server端。
         acknowledge-mode: manual #手动ACK
+        retry:
+          enabled: true # 开启消费者进行重试
+          max-attempts: 5 # 最大重试次数
+          initial-interval: 3000 # 重试时间间隔
+#  redis:
+#    host: localhost
+#    port: 6739
+#    password: 123456
+#    # redis连接超时时间（单位毫秒）
+#    timeout: 0
+#    # redis连接池配置
+#    jedis:
+#      pool:
+#        # 最大可用连接数（默认为8，负数表示无限）
+#        max-active: 8
+#        # 最大空闲连接数（默认为8，负数表示无限）
+#        max-idle: 8
+#        # 最小空闲连接数（默认为0，该值只有为正数才有用）
+#        min-idle: 0
+#        # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+#        max-wait: -1
