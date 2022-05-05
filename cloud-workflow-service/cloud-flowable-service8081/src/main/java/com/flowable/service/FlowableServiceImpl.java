@@ -51,12 +51,13 @@ public class FlowableServiceImpl implements IFlowableService {
     @Override
     public CommonResult queryTasksByAssignee(String assignee) {
         JSONArray array = new JSONArray();
-        List<Task> list = taskService.createTaskQuery().taskAssignee(assignee).list();
+        List<Task> taskList = taskService.createTaskQuery().taskAssignee(assignee).list();
 
-        list.forEach(el -> {
+        taskList.forEach(task -> {
             JSONObject result = new JSONObject();
-            result.put("taskId", el.getId());
-            result.put("taskName", el.getName());
+            result.put("taskId", task.getId());
+            result.put("taskName", task.getName());
+            result.put("assignee",task.getAssignee());
             array.add(result);
         });
         return new CommonResult<>(200, "查询任务成功", array);
@@ -93,6 +94,5 @@ public class FlowableServiceImpl implements IFlowableService {
             array.add(result);
         });
         return new CommonResult<>(200, "根据流程ID查询流程历史任务成功", array);
-
     }
 }
