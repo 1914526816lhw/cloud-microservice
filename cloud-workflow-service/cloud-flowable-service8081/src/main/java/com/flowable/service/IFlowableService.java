@@ -4,6 +4,7 @@ package com.flowable.service;
 import com.alibaba.fastjson.JSONObject;
 import com.flowable.common.CommonResult;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -21,15 +22,23 @@ import java.util.Map;
      */
 public interface IFlowableService {
 
+    /*手动部署流程*/
+    String ployProcess(String userId);
+
     /*启动流程*/
-    public void startProcess(Map<String,Object> map);
+    String startProcess(String processInstanceId, Map<String, Object> map);
 
     /*查询任务*/
-    public CommonResult queryTasksByAssignee(String assignee);
+    CommonResult queryTasksByAssignee(String processInstanceId,String assignee);
 
-    /*审批流程*/
-    public void completeTask(JSONObject paramJson);
+    /*审批完成流程*/
+    void completeTask(JSONObject paramJson);
 
-    /*查询流程任务历史数据*/
-    public CommonResult queryProcessTaskHistory(String processId);
+    /*根据流程Id查询流程任务历史数据*/
+    CommonResult queryProcessTaskHistory(String processInstanceId);
+
+    void genProcessDiagram(HttpServletResponse httpServletResponse, String processInstanceId) throws Exception;
+
+    /*分页查询所有流程的历史数据*/
+
 }

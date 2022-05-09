@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author lihw
@@ -20,33 +20,37 @@ import java.util.Map;
 @RestController
 @RequestMapping("/flowable")
 @Slf4j
-public class FloableController {
+public class FlowableController {
 
     @Autowired
     private IFlowableService iFlowableService;
 
-    @RequestMapping("/startProcess")
-    public CommonResult startProcess(@RequestBody Map<String, Object> map) {
-        log.info(map.toString());
-        iFlowableService.startProcess(map);
-        return new CommonResult(200,"开始流程成功");
+    @RequestMapping("/ployProcess")
+    public CommonResult startProcess(String userId) {
+        iFlowableService.ployProcess(userId);
+        return new CommonResult(200, "开始流程成功");
     }
 
 
     @RequestMapping("/queryTasksByAssignee")
-    public CommonResult queryTasksByAssignee(String assignee) {
-        return iFlowableService.queryTasksByAssignee(assignee);
+    public CommonResult queryTasksByAssignee(String processInstanceId, String assignee) {
+        return iFlowableService.queryTasksByAssignee(processInstanceId, assignee);
     }
 
     @RequestMapping("/completeTask")
     public CommonResult completeTask(@RequestBody JSONObject paramJson) {
         iFlowableService.completeTask(paramJson);
-        return new CommonResult(200,"完成审核任务成功");
+        return new CommonResult(200, "完成审核任务成功");
 
     }
 
     @RequestMapping("/queryProcessTaskHistory")
-    public CommonResult queryProcessTaskHistory(String processId){
-        return iFlowableService.queryProcessTaskHistory(processId);
+    public CommonResult queryProcessTaskHistory(String processInstanceId) {
+        return iFlowableService.queryProcessTaskHistory(processInstanceId);
+    }
+
+    @RequestMapping("/genProcessDiagram")
+    public void genProcessDiagram(HttpServletResponse httpServletResponse, String processInstanceId) throws Exception {
+        iFlowableService.genProcessDiagram(httpServletResponse, processInstanceId);
     }
 }

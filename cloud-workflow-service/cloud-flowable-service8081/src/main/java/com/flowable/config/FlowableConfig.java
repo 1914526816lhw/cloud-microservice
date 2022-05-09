@@ -1,25 +1,35 @@
-//package com.flowable.config;
-//
-//import org.flowable.spring.SpringProcessEngineConfiguration;
-//import org.flowable.spring.boot.EngineConfigurationConfigurer;
-//import org.springframework.context.annotation.Configuration;
-//
-//
-///**
-// * @author lihw
-// * @className FlowableConfig
-// * @date 2022-04-28 15:59
-// * @description
-// */
-//@Configuration
-//public class FlowableConfig implements EngineConfigurationConfigurer<SpringProcessEngineConfiguration> {
-//
-//
-//    @Override
-//    public void configure(SpringProcessEngineConfiguration springProcessEngineConfiguration) {
-//        //当监测到数据库表版本不一致是，会自动升级
-//        springProcessEngineConfiguration.setDatabaseSchemaUpdate(SpringProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
-//        //关闭定时任务
-//        springProcessEngineConfiguration.setAsyncExecutorActivate(false);
-//    }
-//}
+package com.flowable.config;
+
+import com.baomidou.dynamic.datasource.annotation.DS;
+import org.flowable.spring.SpringProcessEngineConfiguration;
+import org.flowable.spring.boot.EngineConfigurationConfigurer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
+
+
+/**
+ * @author lihw
+ * @className FlowableConfig
+ * @date 2022-04-28 15:59
+ * @description
+ */
+@Configuration
+public class FlowableConfig implements EngineConfigurationConfigurer<SpringProcessEngineConfiguration> {
+
+    @Autowired
+    @Qualifier("flowableDataSource")
+    private DataSource flowableDataSource;
+
+    @Override
+    @DS("flowable")
+    public void configure(SpringProcessEngineConfiguration config) {
+        config.setActivityFontName("宋体");
+        config.setLabelFontName("宋体");
+        config.setAnnotationFontName("宋体");
+        config.setCreateDiagramOnDeploy(true);
+        config.setDataSource(flowableDataSource);
+    }
+}
