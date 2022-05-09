@@ -1,6 +1,5 @@
 package com.flowable.config;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
 import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.flowable.spring.boot.EngineConfigurationConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ public class FlowableConfig implements EngineConfigurationConfigurer<SpringProce
     private DataSource flowableDataSource;
 
     @Override
-    @DS("flowable")
     public void configure(SpringProcessEngineConfiguration config) {
         config.setActivityFontName("宋体");
         config.setLabelFontName("宋体");

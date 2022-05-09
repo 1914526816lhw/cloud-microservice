@@ -2,7 +2,6 @@ package com.flowable.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.dynamic.datasource.annotation.DS;
 import com.flowable.common.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.model.BpmnModel;
@@ -14,9 +13,7 @@ import org.flowable.engine.runtime.Execution;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.image.ProcessDiagramGenerator;
 import org.flowable.task.api.Task;
-import org.flowable.task.api.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +33,6 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-@DS("flowable")
 public class FlowableServiceImpl implements IFlowableService {
 
     
