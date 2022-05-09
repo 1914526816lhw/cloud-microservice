@@ -2,7 +2,7 @@ package com.flowable.service;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.flowable.common.CommonResult;
+import com.atguigu.springcloud.entities.CommonResult;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -29,7 +29,7 @@ public interface IFlowableService {
     String startProcess(String processInstanceId, Map<String, Object> map);
 
     /*查询任务*/
-    CommonResult queryTasksByAssignee(String processInstanceId,String assignee);
+    CommonResult queryTasksByAssignee(String processInstanceId, String assignee);
 
     /*审批完成流程*/
     void completeTask(JSONObject paramJson);

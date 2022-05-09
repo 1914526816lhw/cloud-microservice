@@ -1,6 +1,6 @@
 package com.flowable.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import com.atguigu.springcloud.entities.CommonResult;
 import com.flowable.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +20,8 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @RequestMapping("/queryPayment")
-    public JSONObject queryPayment(){
-        return paymentService.queryPayment();
+    public CommonResult queryPayment(Long id) {
+        return new CommonResult<>(200, "根据Id查询成功", paymentService.queryPayment(id));
     }
 }
 

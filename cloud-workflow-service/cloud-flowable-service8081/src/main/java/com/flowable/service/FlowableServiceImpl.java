@@ -2,7 +2,7 @@ package com.flowable.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.flowable.common.CommonResult;
+import com.atguigu.springcloud.entities.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.engine.*;

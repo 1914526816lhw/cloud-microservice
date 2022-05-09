@@ -1,7 +1,7 @@
 package com.flowable.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.flowable.common.CommonResult;
+import com.atguigu.springcloud.entities.CommonResult;
 import com.flowable.service.IFlowableService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.flowable.service;
 
-import com.alibaba.fastjson.JSONObject;
+import com.atguigu.springcloud.entities.Payment;
+import com.flowable.mapper.PaymentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,10 +14,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentService {
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private PaymentMapper paymentMapper;
 
-    public JSONObject queryPayment() {
-        String sql = "select * from payment";
-        return jdbcTemplate.queryForList(sql, JSONObject.class).get(0);
+    public Payment queryPayment(Long id) {
+        return paymentMapper.queryPaymentById(id);
     }
 }
