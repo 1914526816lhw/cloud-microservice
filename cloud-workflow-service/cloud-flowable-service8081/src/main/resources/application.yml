@@ -9,8 +9,8 @@ spring:
       datasource:
         master:
           driver-class-name: com.mysql.jdbc.Driver
-#          url: jdbc:mysql://2d77196l54.51vip.biz:24951/db2021?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
-          url: jdbc:mysql://localhost:3306/db2021?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
+          url: jdbc:mysql://2d77196l54.51vip.biz:24951/db2021?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
+#          url: jdbc:mysql://localhost:3306/db2021?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
           username: root
           password: 123456
 #          driver-class-name: com.mysql.cj.jdbc.Driver
@@ -20,8 +20,8 @@ spring:
 
         flowable:
           driver-class-name: com.mysql.jdbc.Driver
-#          url: jdbc:mysql://2d77196l54.51vip.biz:24951/flowable?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
-          url: jdbc:mysql://localhost:3306/flowable?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
+          url: jdbc:mysql://2d77196l54.51vip.biz:24951/flowable?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
+#          url: jdbc:mysql://localhost:3306/flowable?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
           username: root
           password: 123456
 
@@ -37,6 +37,6 @@ flowable:
   async-executor-activate: false
   process-file:
     work-order:
-      path: C:\Users\lihw\Desktop\MyHolidayUI.bpmn20.xml
+      path: ‪C:\Users\李宏伟\Desktop\WorkOrderAuditFlow.bpmn20.xml
       process-name: 请假流程
 
