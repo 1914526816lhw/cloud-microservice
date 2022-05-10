@@ -4,7 +4,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     dynamic:
+      # 指定默认数据源
       primary: master
+      # true：找不到数据源报错，false：找不到数据源则使用数据源
       strict: false
       datasource:
         master:
