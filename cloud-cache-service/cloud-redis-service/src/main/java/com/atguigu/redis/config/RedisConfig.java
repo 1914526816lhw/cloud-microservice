@@ -1,4 +1,4 @@
-package com.atguigu.rabbitmq.config;
+package com.atguigu.redis.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

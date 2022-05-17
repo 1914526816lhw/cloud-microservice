@@ -1,4 +1,4 @@
-package com.atguigu.rabbitmq.config;
+package com.atguigu.redis.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.ParserConfig;
