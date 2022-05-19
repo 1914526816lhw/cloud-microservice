@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://2d77196l54.51vip.biz:24951/db2021?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
+    username: root
+    password: 123456
+
+
+mybatis:
+  type-aliases-package: com.atguigu.entities
+  mapper-locations: classpath:mapper/*.xml

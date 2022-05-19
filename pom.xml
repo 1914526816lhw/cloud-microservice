@@ -44,6 +44,7 @@
         <module>cloud-mq-service</module>
         <module>cloud-workflow-service</module>
         <module>cloud-cache-service</module>
+        <module>cloud-test-service</module>
     </modules>
 
 
