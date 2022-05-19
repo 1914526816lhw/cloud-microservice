@@ -1,7 +1,10 @@
 package com.atguigu.entities;
 
 import cn.hutool.core.date.DateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @author lihw
@@ -13,5 +16,7 @@ import lombok.Data;
 public class Student {
     private Integer id;
     private String name;
-    private DateTime updateTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
 }

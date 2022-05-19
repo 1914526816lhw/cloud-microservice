@@ -1,10 +1,10 @@
 package com.atguigu.mapper;
 
-import cn.hutool.core.date.DateTime;
 import com.atguigu.entities.Student;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,5 +18,5 @@ public interface StudentMapper {
 
     int insertStudent(Student student);
 
-    List<Student> selectStudent(@Param("updateTime") DateTime updateTime);
+    List<Student> selectStudent(@Param("updateTime") Date updateTime);
 }
