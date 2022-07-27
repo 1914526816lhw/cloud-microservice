@@ -5,6 +5,15 @@ spring:
   application:
     name: cloud-redis-service
   redis:
-    port: 6379
-    host: 192.168.211.136
-    password:
+    cluster:
+      nodes: 192.168.211.158:6382,192.168.211.158:6383,192.168.211.158:6384,192.168.211.158:6385,192.168.211.158:6386,192.168.211.158:6387
+      max-redirects: 3
+    password: myredis
+    timeout: 5000
+    connect-timeout: 6000
+    jedis:
+      pool:
+        max-idle: 8
+        max-wait: -1
+        max-active: 8
+        min-idle: 0
