@@ -61,6 +61,7 @@
         <mybatis.spring.boot.version>1.3.0</mybatis.spring.boot.version>
         <flowable.version>6.7.2</flowable.version>
         <fastjson.version>1.2.80</fastjson.version>
+        <hutool.version>5.8.3</hutool.version>
     </properties>
 
     <!-- 子模块继承之后，提供作用：锁定版本+子modlue不用写groupId和version  -->
@@ -133,6 +134,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
