@@ -4,8 +4,8 @@ import com.atguigu.entities.Student;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
-import java.util.List;
+
+import java.util.Map;
 
 /**
  * @author lihw
@@ -18,5 +18,5 @@ public interface StudentMapper {
 
     int insertStudent(Student student);
 
-    List<Student> selectStudent(@Param("updateTime") Date updateTime);
+    int selectStudent(@Param("param") Map<String, Object> updateTime);
 }

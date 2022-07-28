@@ -4,7 +4,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db2021?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://2d77196l54.51vip.biz:24951/db2021?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    # url: jdbc:mysql://localhost:3306/db2021?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -13,3 +14,17 @@ spring:
 mybatis:
   type-aliases-package: com.atguigu.entities
   mapperLocations: classpath:mapper/*.xml
+
+testName: test
+
+
+app:
+  thread:
+    #线程池常驻数量
+    core-size: 10
+    #线程池最大数量
+    max-size: 30
+    #线程最大存活时间
+    alive-time: 30
+    #线程池存储队列大小
+    queue-size: 500

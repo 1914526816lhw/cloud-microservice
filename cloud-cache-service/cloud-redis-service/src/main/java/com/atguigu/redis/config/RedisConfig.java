@@ -5,27 +5,22 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
-import io.lettuce.core.resource.ClientResources;
-import org.springframework.beans.factory.ObjectProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.data.redis.LettuceClientConfigurationBuilderCustomizer;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisNode;
-import org.springframework.data.redis.connection.RedisPassword;
-import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import redis.clients.jedis.JedisPoolConfig;
 
+import java.time.Duration;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,62 +30,42 @@ import java.util.Set;
  */
 @Configuration
 @EnableCaching
-@PropertySource("redis-cluster.properties")
+@Slf4j
 public class RedisConfig extends CachingConfigurerSupport {
+//    @Value("${spring.redis.cluster.nodes}")
+//    private String nodes;
 
+//    @Value("${spring.redis.cluster.socketTimeout}")
+//    private int socketTimeout;
+//
+//    @Value("${spring.redis.cluster.connectionTimeOut}")
+//    private int connectionTimeOut;
+//
+//    @Value("${spring.redis.cluster.maxAttempts}")
+//    private int maxAttempts;
 
-    // pool
-    @Value("${redis.pool.maxActive}")
-    private int maxTotal;
-    @Value("${redis.pool.maxIdle}")
-    private int maxIdle;
-    @Value("${redis.pool.minIdle}")
-    private int minIdle;
-    @Value("${redis.pool.maxWaitMillis}")
-    private long maxWaitMillis;
-    @Value("${redis.pool.numTestsPerEvictionRun}")
-    private int numTestsPerEvictionRun;
-    @Value("${redis.pool.timeBetweenEvictionRunsMillis}")
-    private long timeBetweenEvictionRunsMillis;
-    @Value("${redis.pool.minEvictableIdleTimeMillis}")
-    private long minEvictableIdleTimeMillis;
-    @Value("${redis.pool.softMinEvictableIdleTimeMillis}")
-    private long softMinEvictableIdleTimeMillis;
-    @Value("${redis.pool.testOnBorrow}")
-    private boolean testOnBorrow;
-    @Value("${redis.pool.testWhileIdle}")
-    private boolean testWhileIdle;
-    @Value("${redis.pool.testOnReturn}")
-    private boolean testOnReturn;
-    @Value("${redis.pool.blockWhenExhausted}")
-    private boolean blockWhenExhausted;
-
-    // cluster
-    @Value("${redis.cluster.host}")
-    private String host;
-    @Value("${redis.cluster.port}")
-    private String port;
-    @Value("${redis.cluster.socketTimeout}")
-    private int socketTimeout;
-    @Value("${redis.cluster.connectionTimeOut}")
-    private int connectionTimeOut;
-    @Value("${redis.cluster.maxAttempts}")
-    private int maxAttempts;
-    @Value("${redis.cluster.maxRedirects}")
-    private int maxRedirects;
-    @Value("${redis.password}")
-    private String password;
+//    @Value("${spring.redis.password}")
+//    private String password;
+//
+//    @Value("${spring.redis.jedis.pool.min-idle}")
+//    private int minIdle;
+//
+//    @Value("${spring.redis.jedis.pool.max-active}")
+//    private int maxActive;
+//
+//    @Value("${spring.redis.jedis.pool.max-wait}")
+//    private long maxWait;
+//
+//    @Value("${spring.redis.jedis.pool.max-idle}")
+//    private int maxIdle;
 
 
     @Bean
     @SuppressWarnings(value = {"unchecked", "rawtypes"})
-    public RedisTemplate<Object, Object> redisTemplate() {
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
 
-        //redis连接工厂
-        LettuceConnectionFactory connectionFactory = getLettuceConnectionFactory();
-
-        template.setConnectionFactory(connectionFactory);
+        redisTemplate.setConnectionFactory(connectionFactory);
 
         FastJson2JsonRedisSerializer serializer = new FastJson2JsonRedisSerializer(Object.class);
 
@@ -100,26 +75,47 @@ public class RedisConfig extends CachingConfigurerSupport {
         serializer.setObjectMapper(mapper);
 
         // 使用StringRedisSerializer来序列化和反序列化redis的key值
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(serializer);
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(serializer);
 
         // Hash的key也采用StringRedisSerializer的序列化方式
-        template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashValueSerializer(serializer);
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(serializer);
 
-        template.afterPropertiesSet();
-        return template;
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
     }
 
-    private LettuceConnectionFactory getLettuceConnectionFactory() {
-        return new LettuceConnectionFactory(getRedisCusterConfiguration());
-    }
-
-    private RedisClusterConfiguration getRedisCusterConfiguration() {
-        RedisClusterConfiguration config = new RedisClusterConfiguration();
-        config.setPassword(password);
-        return config;
-    }
-
-
+//    //创建redis连接工厂
+//    public JedisConnectionFactory jedisConnectionFactory() {
+//        //集群模式
+//        JedisConnectionFactory factory = new JedisConnectionFactory(redisClusterConfiguration(), poolConfig());
+//        factory.afterPropertiesSet();
+//        return factory;
+//    }
+//
+//    //redis配置
+//    public JedisPoolConfig poolConfig() {
+//        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+//        jedisPoolConfig.setMinIdle(minIdle);
+//        jedisPoolConfig.setMaxTotal(maxActive);
+//        jedisPoolConfig.setMaxIdle(maxIdle);
+//        jedisPoolConfig.setMaxWait(Duration.ofMillis(maxWait));
+//        return jedisPoolConfig;
+//    }
+//
+//
+//    //redis集群配置,6个ip以,分割，然后再以:分割
+//    public RedisClusterConfiguration redisClusterConfiguration() {
+//        RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration();
+//        String[] cNodes = nodes.split(",");
+//        Set<RedisNode> hp = new HashSet<>();
+//        for (String node : cNodes) {
+//            String[] split = node.split(":");
+//            hp.add(new RedisNode(split[0].trim(), Integer.valueOf(split[1])));
+//        }
+//        redisClusterConfiguration.setPassword(password);
+//        redisClusterConfiguration.setClusterNodes(hp);
+//        return redisClusterConfiguration;
+//    }
 }

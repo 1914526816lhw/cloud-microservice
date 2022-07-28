@@ -4,3 +4,28 @@ server:
 spring:
   application:
     name: cloud-redis-service
+  redis:
+    cluster:
+      #集群节点
+      nodes: 192.168.211.158:6382,192.168.211.158:6383,192.168.211.158:6384,192.168.211.158:6385,192.168.211.158:6386,192.168.211.158:6387
+      #最大重定向次数
+      max-redirects: 5
+#      #redis读写超时时间（毫秒）
+#      socketTimeout: 1000
+#      #redis连接超时时间（毫秒）
+#      connectionTimeOut: 3000
+#      #最大尝试连接次数
+#      maxAttempts: 10
+    password: myredis
+    jedis:
+      pool:
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        enabled: true
+
+#  redis:
+#    password: myredis
+#    host: 192.168.211.158
+#    port: 6382

@@ -12,7 +12,7 @@
     </insert>
 
 
-    <select id="selectStudent" resultMap="StudentResult">
-        select * from student where update_time  <![CDATA[ <= ]]> #{updateTime}
+    <select id="selectStudent" resultType="java.lang.Integer">
+        select count(*) as send_count from student where update_time  <![CDATA[ <= ]]> #{param.updateTime}
     </select>
 </mapper>
