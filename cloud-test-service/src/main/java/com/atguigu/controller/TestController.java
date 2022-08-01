@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
 
 
-    @PostMapping("/test")
-    public String test01(@RequestParam("phone") String phone){
-        System.out.println(phone);
+    @DeleteMapping("/delete")
+    public String test01(Long[] ids){
+        for (int i = 0; i < ids.length; i++) {
+            System.out.println("ids[i] = " + ids[i]);
+        }
+        System.out.println("ids.length = " + ids.length);
         return "Hello world";
     }
 }
