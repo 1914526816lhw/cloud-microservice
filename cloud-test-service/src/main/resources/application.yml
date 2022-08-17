@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9999
 
 spring:
   datasource:
@@ -28,3 +28,4 @@ app:
     alive-time: 30
     #线程池存储队列大小
     queue-size: 500
+
