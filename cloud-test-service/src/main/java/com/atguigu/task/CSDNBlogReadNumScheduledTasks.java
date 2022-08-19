@@ -24,34 +24,13 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-public class ReadNumTask {
+public class CSDNBlogReadNumScheduledTasks {
 
     private boolean flag = true;
 
     private Integer total = 0;
 
     private List<String> articleUrls;
-
-    private List<String> listUrl = new ArrayList<>();
-
-    {
-        //商品
-        String url1 = "https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-24358234104.9.6df267c9Bpy0RB&id=678926529946";
-        String url2 = "https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-24358234104.11.6dfa67c92ecjVs&id=679221562703";
-        String url3 = "https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-24358234104.13.6dfa67c92ecjVs&id=679274646253";
-        String url4 = "https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-24358234104.15.6dfa67c92ecjVs&id=679546451602";
-        String url5 = "https://item.taobao.com/item.htm?spm=a1z10.3-c.w4002-24358234104.17.6dfa67c92ecjVs&id=679614307710";
-        //进店
-        String shopUrl = "https://shop275216655.taobao.com/?spm=2013.1.1000126.d21.cea45ef9bZ4low";
-
-        listUrl.add(url1);
-        listUrl.add(url2);
-        listUrl.add(url3);
-        listUrl.add(url4);
-        listUrl.add(url5);
-        listUrl.add(shopUrl);
-    }
-
 
     /*定时访问：n 秒一次*/
     @Async
@@ -87,12 +66,18 @@ public class ReadNumTask {
     private List<String> getAllArticle() {
         List<String> articleUrlList = new ArrayList<>();
         //初始化页数
-        int initPage = 1;
+        int page = 1;
         //每页数量
-        int page = 100;
+        int pageSize = 100;
+        //账号，只需要修改账号即可
+        String username = "qq_36763419";
+        //业务类型
+        String businessType = "blog";
+        //地址
+        String url = "https://blog.csdn.net/community/home-api/v1/get-business-list";
         do {
             //拼接文章地址
-            String blogArticleUrl = "https://blog.csdn.net/community/home-api/v1/get-business-list?page=" + initPage + "&size=" + page + "&businessType=blog&orderby=&noMore=false&year=&month=&username=qq_36763419";
+            String blogArticleUrl = url + "?page=" + page + "&size=" + pageSize + "&businessType=" + businessType + "&username=" + username;
             HttpRequest request = HttpUtil.createGet(blogArticleUrl);
             HttpResponse response = request.execute();
             JSONObject resJson = JSON.parseObject(response.body());
@@ -105,35 +90,9 @@ public class ReadNumTask {
                     String articleUrl = article.getString("url");
                     articleUrlList.add(articleUrl);
                 }
-                initPage++;
+                page++;
             }
         } while (true);
         return articleUrlList;
-    }
-
-
-    /*刷访问量淘宝*/
-    @Scheduled(cron = "0/3 * * * * ?")
-    @Async
-    public void taobaoAccess() {
-
-        if (flag) {
-            flag = false;
-            total++;
-            for (int i = 0; i < listUrl.size(); i++) {
-                String url = listUrl.get(i);
-                try {
-                    HttpRequest request = HttpUtil.createGet(url);
-                    request.execute();
-                    log.info("请求【淘宝】地址【{}】成功", url);
-                } catch (Exception e) {
-                    log.error("请求【淘宝】地址【{}】失败,报错信息为：{}", url, e.getMessage());
-                }
-            }
-            System.out.println("【淘宝】第" + (total) + "次定时任务成功");
-            flag = true;
-        } else {
-            System.out.println("上一次【淘宝刷访问量】任务还没执行完成");
-        }
     }
 }
