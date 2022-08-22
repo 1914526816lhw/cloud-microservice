@@ -71,6 +71,7 @@ public class CSDNBlogReadNumScheduledTasks {
         int pageSize = 100;
         //账号，只需要修改账号即可
         String username = "qq_36763419";
+
         //业务类型
         String businessType = "blog";
         //地址
